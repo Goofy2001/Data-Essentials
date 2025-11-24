@@ -32,3 +32,20 @@ JOIN planten p ON o.art_code = p.art_code
 GROUP BY o.art_code, p.plantennaam
 ORDER BY p.plantennaam;
 --oef 9
+SELECT soort, ROUND(AVG(prijs),2)
+FROM planten
+GROUP BY soort
+HAVING COUNT(soort) >= 5;
+--oef 10
+SELECT lev_tijd, ROUND(AVG(off_prijs),2)
+FROM offertes
+GROUP BY lev_tijd
+ORDER BY lev_tijd;
+--oef 11
+SELECT soort, MIN(prijs)
+FROM PLANTEN
+WHERE 
+    5 BETWEEN bloeibegin AND bloeieinde
+        OR 
+    6 BETWEEN bloeibegin AND bloeieinde
+GROUP BY soort;
