@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Essentials — Studiegids</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Fira+Code:wght@400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f14;
+    --surface: #16181f;
+    --surface2: #1e2130;
+    --accent: #5b8cf7;
+    --accent2: #f7c45b;
+    --accent3: #5bf7a8;
+    --accent4: #f75b8c;
+    --text: #dde3f5;
+    --muted: #7a82a0;
+    --border: #2a2f45;
+    --code-bg: #101520;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  /* ── SIDEBAR NAV ── */
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 260px;
+    height: 100vh;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #sidebar-header {
+    padding: 24px 20px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  #sidebar-header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+  }
+
+  #sidebar-header p {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 4px;
+    font-family: 'Syne', sans-serif;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  #nav-search {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  #nav-search input {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 7px 12px;
+    color: var(--text);
+    font-size: 0.82rem;
+    font-family: 'Syne', sans-serif;
+    outline: none;
+  }
+
+  #nav-search input:focus { border-color: var(--accent); }
+
+  nav { padding: 12px 0; flex: 1; }
+
+  nav a {
+    display: block;
+    padding: 7px 20px;
+    color: var(--muted);
+    text-decoration: none;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+  }
+
+  nav a:hover, nav a.active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    background: rgba(91,140,247,0.07);
+  }
+
+  nav .nav-section {
+    padding: 14px 20px 4px;
+    font-size: 0.65rem;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--border);
+  }
+
+  /* ── MAIN CONTENT ── */
+  #main {
+    margin-left: 260px;
+    max-width: 900px;
+    padding: 48px 52px 120px;
+  }
+
+  /* ── CHAPTERS ── */
+  .chapter {
+    margin-bottom: 72px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .chapter-tag {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  h2.chapter-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: var(--accent2);
+    margin: 32px 0 10px;
+    padding-left: 12px;
+    border-left: 3px solid var(--accent2);
+  }
+
+  h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--accent3);
+    margin: 20px 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  p { margin-bottom: 12px; color: var(--text); }
+
+  /* ── CODE ── */
+  pre, code {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.83rem;
+  }
+
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin: 14px 0;
+    overflow-x: auto;
+    line-height: 1.6;
+    color: #a8c5ff;
+  }
+
+  code {
+    background: var(--code-bg);
+    padding: 2px 7px;
+    border-radius: 4px;
+    color: var(--accent3);
+    font-size: 0.82rem;
+  }
+
+  pre code { background: none; padding: 0; color: inherit; }
+
+  /* SQL syntax highlighting */
+  .kw { color: #f7c45b; font-weight: 500; } /* keywords */
+  .fn { color: #f75b8c; }                    /* functions */
+  .str { color: #5bf7a8; }                   /* strings */
+  .cmt { color: #5a6080; font-style: italic; }
+  .num { color: #c7a0f7; }
+
+  /* ── CARDS & BOXES ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 14px 0;
+  }
+
+  .tip {
+    background: rgba(91,140,247,0.08);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin: 14px 0;
+  }
+
+  .tip strong { color: var(--accent); font-family: 'Syne', sans-serif; }
+
+  .warn {
+    background: rgba(247,91,140,0.08);
+    border-left: 4px solid var(--accent4);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin: 14px 0;
+  }
+
+  .warn strong { color: var(--accent4); font-family: 'Syne', sans-serif; }
+
+  .good {
+    background: rgba(91,247,168,0.08);
+    border-left: 4px solid var(--accent3);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin: 14px 0;
+  }
+
+  .good strong { color: var(--accent3); font-family: 'Syne', sans-serif; }
+
+  /* ── TABLE ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 0.88rem;
+  }
+
+  th {
+    background: var(--surface2);
+    color: var(--accent);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    border-bottom: 2px solid var(--border);
+    text-align: left;
+  }
+
+  td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* ── GRID ── */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 14px 0;
+  }
+
+  /* ── BADGE ── */
+  .badge {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin: 0 3px;
+  }
+
+  .b-blue { background: rgba(91,140,247,0.18); color: var(--accent); }
+  .b-yellow { background: rgba(247,196,91,0.18); color: var(--accent2); }
+  .b-green { background: rgba(91,247,168,0.18); color: var(--accent3); }
+  .b-red { background: rgba(247,91,140,0.18); color: var(--accent4); }
+
+  /* ── LIST ── */
+  ul, ol {
+    padding-left: 22px;
+    margin: 10px 0 14px;
+  }
+
+  li { margin-bottom: 5px; }
+
+  /* ── FLOW STEPS ── */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 14px 0;
+    position: relative;
+  }
+
+  .step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 10px 0;
+  }
+
+  .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #000;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 0.78rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* ── TOGGLE SECTIONS ── */
+  details {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin: 10px 0;
+    overflow: hidden;
+  }
+
+  summary {
+    padding: 12px 18px;
+    cursor: pointer;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text);
+    background: var(--surface);
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+  }
+
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '↓'; color: var(--muted); font-size: 0.8rem; }
+  details[open] summary::after { content: '↑'; }
+  details[open] summary { border-bottom: 1px solid var(--border); }
+
+  .details-body {
+    padding: 16px 18px;
+    background: var(--surface2);
+  }
+
+  /* ── PROGRESS BAR ── */
+  #progress-bar {
+    position: fixed;
+    top: 0; left: 260px; right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform-origin: left;
+    transform: scaleX(0);
+    z-index: 200;
+    transition: transform 0.1s;
+  }
+
+  /* ── SEARCH HIGHLIGHT ── */
+  mark {
+    background: rgba(247,196,91,0.35);
+    color: inherit;
+    border-radius: 2px;
+  }
+
+  /* ── QUERY ORDER VISUAL ── */
+  .order-flow {
+    display: flex;
+    gap: 0;
+    flex-wrap: wrap;
+    margin: 14px 0;
+    align-items: center;
+  }
+
+  .of-item {
+    display: flex;
+    align-items: center;
+  }
+
+  .of-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 13px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.78rem;
+    color: var(--accent);
+  }
+
+  .of-box.dim { color: var(--muted); }
+  .of-box.exec { border-color: var(--accent3); color: var(--accent3); }
+
+  .of-arrow {
+    padding: 0 6px;
+    color: var(--border);
+    font-size: 0.9rem;
+  }
+
+  /* ── NORMALIZATION FORM CARDS ── */
+  .nf-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 10px 0;
+    border-top: 3px solid var(--accent);
+  }
+
+  .nf-card h4 { margin-top: 0; }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  @media (max-width: 900px) {
+    #sidebar { width: 220px; }
+    #main { margin-left: 220px; padding: 32px 28px 100px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- SIDEBAR -->
+<aside id="sidebar">
+  <div id="sidebar-header">
+    <h1>Data Essentials</h1>
+    <p>Examenstudiegids</p>
+  </div>
+  <div id="nav-search">
+    <input type="text" id="search-input" placeholder="Zoek in de gids…" />
+  </div>
+  <nav id="nav-links">
+    <div class="nav-section">Concepten</div>
+    <a href="#inleiding">1. Inleiding</a>
+    <a href="#informatieanalyse">2. Informatieanalyse &amp; ERD</a>
+    <a href="#erd-tabellen">3. ERD naar Tabellen</a>
+    <a href="#normalisatie">4. Normalisatie</a>
+    <div class="nav-section">SQL</div>
+    <a href="#sql-inleiding">5. SQL Inleiding</a>
+    <a href="#basis-select">6. Basis SELECT</a>
+    <a href="#join">7. JOIN &amp; UNION</a>
+    <a href="#fetch">8. FETCH &amp; OFFSET</a>
+    <a href="#functies">9. Standaardfuncties</a>
+    <a href="#subqueries">10. Subqueries</a>
+    <a href="#ddl">11. DDL</a>
+    <a href="#dml">12. DML</a>
+    <a href="#transacties">13. Transacties (TCL)</a>
+    <a href="#indexen">14. Indexen</a>
+  </nav>
+</aside>
+
+<main id="main">
+
+<!-- ════════════════════════════════════════════
+     1. INLEIDING
+════════════════════════════════════════════ -->
+<section class="chapter" id="inleiding">
+  <div class="chapter-tag">Hoofdstuk 1</div>
+  <h2 class="chapter-title">Inleiding tot Databases</h2>
+
+  <p>Een <strong>database</strong> is een zichzelf beschrijvende verzameling van gerelateerde records. Naast de gebruikersdata bevat ze ook <em>metadata</em> (structuurbeschrijving), indexen, opgeslagen procedures en triggers.</p>
+
+  <h3>Waarom databases?</h3>
+  <p>Losse bestanden maken het integreren van data heel moeilijk. Een RDBMS (Relationeel Database Management Systeem) lost dit op door:</p>
+  <ul>
+    <li>Data op te slaan in genormaliseerde tabellen met relaties ertussen</li>
+    <li>Integriteitsregels af te dwingen (primary/foreign keys)</li>
+    <li>Concurrentiecontrole en beveiliging te bieden</li>
+    <li>Backup &amp; recovery te voorzien</li>
+  </ul>
+
+  <h3>Data vs. Informatie</h3>
+  <div class="grid-2">
+    <div class="card"><h4>Data</h4>Ruwe opgeslagen cijfers of feiten, bv. <code>400</code>, <code>40</code>, <code>12</code></div>
+    <div class="card"><h4>Informatie</h4>Kennis afgeleid uit data: "Student 400 heeft 12 punten voor vak 40 (Data Advanced)"</div>
+  </div>
+
+  <h3>Relationeel model (E.F. Codd, 1970)</h3>
+  <p>Data wordt opgeslagen in genormaliseerde, tweedimensionale <strong>relaties</strong> (tabellen). Relaties tussen tabellen worden uitgedrukt via <strong>foreign keys</strong>.</p>
+
+  <table>
+    <tr><th>Term (tabel)</th><th>Synoniem (database)</th><th>Betekenis</th></tr>
+    <tr><td>Tabel</td><td>Relatie</td><td>Verzameling records over één onderwerp</td></tr>
+    <tr><td>Rij</td><td>Tuple / Record</td><td>Eén instantie van de entiteit</td></tr>
+    <tr><td>Kolom</td><td>Attribuut / Veld</td><td>Eigenschap van de entiteit</td></tr>
+    <tr><td>Cel</td><td>Atomaire waarde</td><td>Enkelvoudige waarde op rij×kolom</td></tr>
+  </table>
+
+  <h3>Eigenschappen van een relatie</h3>
+  <ul>
+    <li>Cellen bevatten <strong>atomaire (enkelvoudige)</strong> waarden</li>
+    <li>Alle waarden in een kolom zijn van dezelfde soort</li>
+    <li>Elke kolom heeft een unieke naam</li>
+    <li>Volgorde van rijen en kolommen is niet relevant</li>
+  </ul>
+</section>
+
+<!-- ════════════════════════════════════════════
+     2. INFORMATIEANALYSE & ERD
+════════════════════════════════════════════ -->
+<section class="chapter" id="informatieanalyse">
+  <div class="chapter-tag">Hoofdstuk 2</div>
+  <h2 class="chapter-title">Informatieanalyse &amp; ERD</h2>
+
+  <p>Een <strong>Entity Relationship Diagram (ERD)</strong> is een conceptueel model (blauwdruk) van de database. Het stelt de informatiebehoeften van een bedrijf voor vóór de implementatie.</p>
+
+  <div class="grid-2">
+    <div class="card"><h4>Top-down aanpak</h4>Entity Relationship (informatieanalyse) → ERD eerst, dan tabellen</div>
+    <div class="card"><h4>Bottom-up aanpak</h4>Normaliseren (gegevensanalyse) → start van ruwe data naar tabellen</div>
+  </div>
+
+  <h3>Bouwstenen van een ERD</h3>
+
+  <h4>Entiteiten</h4>
+  <p>Een entiteit is iets dat de gebruiker wil bijhouden — een zelfstandig naamwoord in enkelvoud en hoofdletters (bv. <code>WERKNEMER</code>, <code>PRODUCT</code>). Een <strong>instantie</strong> is één concreet voorkomen van die entiteit.</p>
+
+  <h4>Attributen</h4>
+  <p>Eigenschappen van een entiteit. In het ERD aangeduid met:</p>
+  <ul>
+    <li><code>*</code> — Verplicht attribuut</li>
+    <li><code>°</code> — Optioneel attribuut</li>
+    <li><code>#</code> — Identifier (wordt sleutel in de database)</li>
+  </ul>
+
+  <h4>Relaties</h4>
+  <p>Een relatie toont het verband tussen twee entiteiten en heeft altijd:</p>
+  <ul>
+    <li><strong>Twee zijden</strong>, elk met een naam</li>
+    <li><strong>Optionaliteit</strong>: verplicht (volle lijn) of optioneel (stippellijn)</li>
+    <li><strong>Kardinaliteit</strong>: exact 1 (enkele poot) of 1-of-meer (kraaienpoot)</li>
+  </ul>
+
+  <h3>Soorten relaties</h3>
+  <table>
+    <tr><th>Type</th><th>Symbool</th><th>Voorbeeld</th></tr>
+    <tr><td>1:1 (één-op-één)</td><td>enkel poot — enkel poot</td><td>WERKNEMER heeft BADGE</td></tr>
+    <tr><td>1:N (één-op-meer)</td><td>enkel poot — kraaienpoot</td><td>KLANT heeft meerdere FACTUREN</td></tr>
+    <tr><td>N:M (meer-op-meer)</td><td>kraaienpoot — kraaienpoot</td><td>STUDENT volgt meerdere CURSUSSEN</td></tr>
+    <tr><td>Recursief</td><td>pijl naar zichzelf</td><td>WERKNEMER is baas van WERKNEMER</td></tr>
+  </table>
+
+  <h3>Zwakke entiteiten</h3>
+  <p>Een <strong>zwakke entiteit</strong> kan niet bestaan zonder een andere (sterke) entiteit. Bij een <em>ID-afhankelijke</em> zwakke entiteit maakt de identifier van de sterke entiteit deel uit van de identifier van de zwakke entiteit (bv. AUDI is ID-afhankelijk van CAMPUS).</p>
+
+  <h3>Super- en subtypes</h3>
+  <p>Een subtype is een speciaal geval van het supertype (<em>IS-EEN</em> relatie). Het subtype erft alle attributen en relaties van het supertype en heeft dezelfde identifier. Subtypes worden getekend <em>binnen</em> de supertype-box.</p>
+</section>
+
+<!-- ════════════════════════════════════════════
+     3. ERD NAAR TABELLEN
+════════════════════════════════════════════ -->
+<section class="chapter" id="erd-tabellen">
+  <div class="chapter-tag">Hoofdstuk 3</div>
+  <h2 class="chapter-title">ERD naar Tabellen</h2>
+
+  <p>Het omzetten van een ERD naar een relationeel data-ontwerp volgt een vaste procedure. Het data-ontwerp heeft enkel <strong>1:N relaties</strong> (uitgedrukt via foreign keys).</p>
+
+  <h3>Stappenplan</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div><strong>Entiteiten → Tabellen</strong>: Elke entiteit wordt een tabel (meervoud). Samengestelde attributen worden opgesplitst in kolommen. De identifier wordt primary key.</div></div>
+    <div class="step"><div class="step-num">2</div><div><strong>Relaties → Foreign keys</strong>: Per relatietype worden FK's toegevoegd (zie hieronder).</div></div>
+    <div class="step"><div class="step-num">3</div><div><strong>Super-/subtypes → kies optie</strong> (zie hieronder).</div></div>
+  </div>
+
+  <h3>Stap 2: Omzetten van relaties</h3>
+
+  <h4>1:1 relatie</h4>
+  <p>De PK van de ene tabel wordt FK in de andere. Kies de zijde met de minste NULL-waarden. Voorkeur: FK in de tabel die optioneel is in de relatie.</p>
+  <pre><code>MEDEWERKERS (mednr, naam, geboortedatum)
+BEDRIJFSWAGENS (nummerplaat, merk, <span class="kw">mednr</span>)  ← FK naar MEDEWERKERS</code></pre>
+
+  <h4>1:N relatie</h4>
+  <p>De PK van de 1-kant wordt FK in de N-kant.</p>
+  <pre><code>KLANTEN (klantnr, naam, email)
+FACTUREN (factuurnr, datum, bedrag, <span class="kw">klantnr</span>)  ← FK naar KLANTEN</code></pre>
+
+  <h4>N:M relatie</h4>
+  <p>Er wordt een nieuwe <strong>tussentabel</strong> aangemaakt. De PK is de combinatie van de PK's van beide entiteiten.</p>
+  <pre><code>STUDENTEN (studnr, naam)
+CURSUSSEN (cursusnr, naam)
+INSCHRIJVINGEN (<span class="kw">studnr, cursusnr</span>)  ← PK = beide FK's samen</code></pre>
+
+  <h4>Recursieve 1:N relatie</h4>
+  <p>FK wordt in dezelfde tabel toegevoegd.</p>
+  <pre><code>MEDEWERKERS (mednr, naam, <span class="kw">leidinggevende</span>)  ← FK naar mednr in dezelfde tabel</code></pre>
+
+  <h4>Recursieve N:M relatie</h4>
+  <p>Nieuwe tussentabel met twee keer de identifier (verschillende kolomnamen).</p>
+  <pre><code>VERVANGINGEN (<span class="kw">wnr, vervanger</span>)  ← beide FK naar MEDEWERKERS.mednr</code></pre>
+
+  <h4>ID-afhankelijke entiteit</h4>
+  <p>De FK van de parent wordt deel van de samengestelde PK van de child.</p>
+  <pre><code>CAMPUSSEN (locatie, naam)
+AUDIS (<span class="kw">locatie</span>, audinr, stoelen)  ← PK = (locatie, audinr)</code></pre>
+
+  <h3>Stap 3: Super- en subtypes omzetten</h3>
+  <table>
+    <tr><th>Optie</th><th>Aanpak</th><th>Voordelen</th><th>Nadelen</th></tr>
+    <tr><td><strong>Optie 1</strong></td><td>Aparte tabel per super- en subtype; PK supertype = FK subtype</td><td>Duidelijk, weinig NULLs</td><td>Data verspreid over tabellen</td></tr>
+    <tr><td><strong>Optie 2</strong></td><td>Enkel tabellen per subtype; supertype-attributen herhalen</td><td>Alle data in 1 tabel per type</td><td>Redundantie</td></tr>
+    <tr><td><strong>Optie 3</strong></td><td>Alles in 1 tabel met een categorie-kolom</td><td>Performantie bij grote datasets</td><td>Veel NULLs; subtype-velden nooit verplicht</td></tr>
+  </table>
+
+  <h3>Goede primary key</h3>
+  <ul>
+    <li>Enkelvoudig, uniek, nooit NULL</li>
+    <li>Kort en bij voorkeur numeriek</li>
+    <li>Wordt nooit gewijzigd</li>
+    <li>Vaak een <strong>surrogaatsleutel</strong> (<code>id</code>) zonder betekenis voor de gebruiker</li>
+    <li>Nooit privacy-gevoelige waarden (bv. rijksregisternummer)</li>
+  </ul>
+</section>
+
+<!-- ════════════════════════════════════════════
+     4. NORMALISATIE
+════════════════════════════════════════════ -->
+<section class="chapter" id="normalisatie">
+  <div class="chapter-tag">Hoofdstuk 4</div>
+  <h2 class="chapter-title">Normalisatie</h2>
+
+  <p>Normalisatie is een bottom-up techniek om data te organiseren zodat data-integriteit bewaard blijft en wijzigingsanomalieën worden vermeden.</p>
+
+  <h3>Waarom normaliseren?</h3>
+  <p>Niet-genormaliseerde tabellen leiden tot:</p>
+  <ul>
+    <li><strong>Update-anomalie</strong>: dezelfde data op meerdere plaatsen aanpassen</li>
+    <li><strong>Invoeganomalie</strong>: je kunt geen data invoegen zonder andere (onnodige) data in te vullen</li>
+    <li><strong>Verwijderanomalie</strong>: verwijderen van een rij verwijdert ook andere nuttige data</li>
+  </ul>
+
+  <h3>Functionele afhankelijkheid (FA)</h3>
+  <p><code>A → B</code> betekent: als je de waarde van A kent, ken je uniek de waarde van B. A is de <em>determinant</em>.</p>
+  <div class="card">
+    <strong>Voorbeeld:</strong> <code>personeelsnummer → naam</code> (kennis van PersNr geeft je uniek de naam)<br>
+    <strong>Transitief:</strong> <code>PersNr → AfdelingNr → {AfdelingNaam, AfdelingPlaats}</code>
+  </div>
+
+  <h3>Normaalvormen</h3>
+
+  <div class="nf-card">
+    <h4>0NF — Niet-genormaliseerd</h4>
+    <p>Opsplitsen van samengestelde gegevens in elementaire gegevens. Procesgegevens die berekend kunnen worden, verwijderen.</p>
+  </div>
+
+  <div class="nf-card" style="border-top-color:var(--accent2)">
+    <h4>1NF — Eerste Normaalvorm</h4>
+    <p>Alle attributen zijn <strong>atomisch</strong> (geen herhalende deelverzamelingen). Kies een sleutel zodat er geen herhalende groepen zijn.</p>
+    <div class="tip"><strong>Test:</strong> Heeft een cel meer dan één waarde? Staat er een "interne tabel" in de tabel? Dan ben je niet in 1NF.</div>
+  </div>
+
+  <div class="nf-card" style="border-top-color:var(--accent3)">
+    <h4>2NF — Tweede Normaalvorm</h4>
+    <p>In 1NF + elk attribuut is functioneel afhankelijk van de <strong>volledige sleutel</strong> (geen gedeeltelijke afhankelijkheid). Probleem treedt enkel op bij samengestelde sleutels.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div>Zorg dat de relatie in 1NF is</div></div>
+      <div class="step"><div class="step-num">2</div><div>Zoek attributen die afhankelijk zijn van slechts <em>een deel</em> van de sleutel</div></div>
+      <div class="step"><div class="step-num">3</div><div>Verplaats die naar een nieuwe relatie met dat sleuteldeel als PK</div></div>
+    </div>
+  </div>
+
+  <div class="nf-card" style="border-top-color:var(--accent4)">
+    <h4>3NF — Derde Normaalvorm</h4>
+    <p>In 2NF + <strong>geen transitieve afhankelijkheden</strong> (geen A → B → C waarbij B geen kandidaatsleutel is).</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div>Zorg dat de relatie in 2NF is</div></div>
+      <div class="step"><div class="step-num">2</div><div>Zoek attributen die FA zijn van een niet-sleutel attribuut</div></div>
+      <div class="step"><div class="step-num">3</div><div>Verplaats die naar een nieuwe relatie</div></div>
+    </div>
+    <div class="tip"><strong>3NF = "genormaliseerd"</strong> — voor de meeste praktijksituaties voldoende.</div>
+  </div>
+
+  <details>
+    <summary>BCNF — Boyce-Codd Normaalvorm</summary>
+    <div class="details-body">
+      <p>In 3NF + alle determinanten zijn kandidaatsleutels. Relevanter bij tabellen met meerdere overlappende kandidaatsleutels.</p>
+      <p><strong>Voorbeeld:</strong> Als docent → cursus (een docent geeft maar één cursus), maar de PK (StudentNr, Cursus) heeft als determinant ook "Docent", dan verplaats je Docent → Cursus naar een aparte tabel.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>4NF — Vierde Normaalvorm</summary>
+    <div class="details-body">
+      <p>In BCNF + geen meerwaardige afhankelijkheden. Een meerwaardige afhankelijkheid treedt op als voor elke waarde van A, de waarden van B en C onafhankelijk van elkaar variëren. Oplossing: splits B en C naar aparte tabellen met A als sleutel.</p>
+    </div>
+  </details>
+
+  <h3>Samenvatting normaalvormen</h3>
+  <table>
+    <tr><th>Normaalvorm</th><th>Vereiste</th></tr>
+    <tr><td><span class="badge b-blue">1NF</span></td><td>Alle attributen atomisch, geen herhalende groepen</td></tr>
+    <tr><td><span class="badge b-yellow">2NF</span></td><td>1NF + geen gedeeltelijke afhankelijkheid van de sleutel</td></tr>
+    <tr><td><span class="badge b-green">3NF</span></td><td>2NF + geen transitieve afhankelijkheden</td></tr>
+    <tr><td><span class="badge b-red">BCNF</span></td><td>3NF + elke determinant is een kandidaatsleutel</td></tr>
+    <tr><td><span class="badge b-blue">4NF</span></td><td>BCNF + geen meerwaardige afhankelijkheden</td></tr>
+  </table>
+</section>
+
+<!-- ════════════════════════════════════════════
+     5. SQL INLEIDING
+════════════════════════════════════════════ -->
+<section class="chapter" id="sql-inleiding">
+  <div class="chapter-tag">Hoofdstuk 5</div>
+  <h2 class="chapter-title">SQL Inleiding</h2>
+
+  <p>SQL (Structured Query Language) is de internationale standaardtaal voor relationele databanken. Ze is <strong>declaratief</strong>: je zegt <em>wát</em> je wil, niet <em>hoe</em> het DBMS het moet ophalen.</p>
+
+  <h3>Soorten SQL-instructies</h3>
+  <table>
+    <tr><th>Categorie</th><th>Afkorting</th><th>Statements</th><th>Doel</th></tr>
+    <tr><td>Data Query Language</td><td><span class="badge b-blue">DQL</span></td><td><code>SELECT</code></td><td>Data opvragen</td></tr>
+    <tr><td>Data Manipulation Language</td><td><span class="badge b-green">DML</span></td><td><code>INSERT UPDATE DELETE</code></td><td>Data wijzigen</td></tr>
+    <tr><td>Data Definition Language</td><td><span class="badge b-yellow">DDL</span></td><td><code>CREATE ALTER DROP</code></td><td>Structuur wijzigen</td></tr>
+    <tr><td>Data Control Language</td><td><span class="badge b-red">DCL</span></td><td><code>GRANT REVOKE</code></td><td>Beveiliging</td></tr>
+    <tr><td>Transaction Control Language</td><td><span class="badge b-blue">TCL</span></td><td><code>COMMIT ROLLBACK SAVEPOINT</code></td><td>Transactiebeheer</td></tr>
+  </table>
+</section>
+
+<!-- ════════════════════════════════════════════
+     6. BASIS SELECT
+════════════════════════════════════════════ -->
+<section class="chapter" id="basis-select">
+  <div class="chapter-tag">Hoofdstuk 6</div>
+  <h2 class="chapter-title">Basis SELECT</h2>
+
+  <h3>Syntaxis</h3>
+  <pre><code><span class="kw">SELECT</span> kolomnaam [, kolomnaam, ...]
+<span class="kw">FROM</span>   tabelnaam
+<span class="kw">WHERE</span>  voorwaarde
+<span class="kw">ORDER BY</span> kolomnaam [<span class="kw">ASC</span> | <span class="kw">DESC</span>];</code></pre>
+
+  <h3>Volgorde van verwerking (≠ schrijfvolgorde!)</h3>
+  <div class="order-flow">
+    <div class="of-item"><div class="of-box exec">FROM / JOIN</div><div class="of-arrow">→</div></div>
+    <div class="of-item"><div class="of-box exec">WHERE</div><div class="of-arrow">→</div></div>
+    <div class="of-item"><div class="of-box exec">GROUP BY</div><div class="of-arrow">→</div></div>
+    <div class="of-item"><div class="of-box exec">HAVING</div><div class="of-arrow">→</div></div>
+    <div class="of-item"><div class="of-box exec">SELECT</div><div class="of-arrow">→</div></div>
+    <div class="of-item"><div class="of-box exec">ORDER BY</div><div class="of-arrow">→</div></div>
+    <div class="of-item"><div class="of-box exec">OFFSET / FETCH</div></div>
+  </div>
+  <div class="tip"><strong>Tip:</strong> Standaardfuncties (COUNT, AVG, …) worden pas in de SELECT of HAVING verwerkt — daarom mag je ze niet in de WHERE zetten.</div>
+
+  <h3>SELECT-component</h3>
+  <pre><code><span class="kw">SELECT</span> *                         <span class="cmt">-- alle kolommen (af te raden in code)</span>
+<span class="kw">SELECT</span> wnaam, salaris            <span class="cmt">-- specifieke kolommen</span>
+<span class="kw">SELECT DISTINCT</span> fnaam            <span class="cmt">-- unieke waarden</span>
+<span class="kw">SELECT</span> salaris * <span class="num">12</span> <span class="kw">AS</span> jaarloon  <span class="cmt">-- berekende kolom met alias</span></code></pre>
+
+  <h3>WHERE-operatoren</h3>
+  <table>
+    <tr><th>Type</th><th>Operators</th><th>Voorbeeld</th></tr>
+    <tr><td>Relationeel</td><td><code>= &lt; &gt; &lt;= &gt;= &lt;&gt;</code></td><td><code>WHERE salaris &gt; 1000</code></td></tr>
+    <tr><td>Rekenkundig</td><td><code>+ - * /</code></td><td><code>WHERE salaris * 12 &gt; 16000</code></td></tr>
+    <tr><td>Logisch</td><td><code>AND OR NOT</code></td><td><code>WHERE sal &gt; 1000 AND fnaam != 'DIRECTEUR'</code></td></tr>
+    <tr><td>Bereik</td><td><code>BETWEEN … AND</code></td><td><code>WHERE salaris BETWEEN 1500 AND 2500</code></td></tr>
+    <tr><td>Lijst</td><td><code>IN (…)</code></td><td><code>WHERE plaats IN ('Brussel', 'Gent')</code></td></tr>
+    <tr><td>Patroon</td><td><code>LIKE '%patroon_'</code></td><td><code>WHERE wnaam LIKE 'V%'</code></td></tr>
+    <tr><td>NULL</td><td><code>IS NULL / IS NOT NULL</code></td><td><code>WHERE salaris IS NOT NULL</code></td></tr>
+  </table>
+
+  <div class="warn"><strong>Let op NULL:</strong> Rekenen met NULL geeft altijd NULL. Gebruik <code>IS NULL</code> / <code>IS NOT NULL</code>, nooit <code>= NULL</code>.</div>
+
+  <h3>ORDER BY</h3>
+  <pre><code><span class="kw">ORDER BY</span> salaris <span class="kw">DESC</span>, wnaam <span class="kw">ASC</span>;   <span class="cmt">-- eerst dalend op salaris, dan oplopend op naam</span>
+<span class="kw">ORDER BY</span> salaris <span class="kw">DESC NULLS LAST</span>;     <span class="cmt">-- NULL-waarden naar achter</span></code></pre>
+</section>
+
+<!-- ════════════════════════════════════════════
+     7. JOIN & UNION
+════════════════════════════════════════════ -->
+<section class="chapter" id="join">
+  <div class="chapter-tag">Hoofdstuk 7</div>
+  <h2 class="chapter-title">JOIN &amp; UNION</h2>
+
+  <p>Een JOIN combineert rijen uit twee tabellen op basis van een conditie. Zonder JOIN-conditie krijg je een <strong>Cartesisch product</strong> (elke rij × elke rij = zelden gewenst).</p>
+
+  <h3>INNER JOIN (standaard)</h3>
+  <pre><code><span class="kw">SELECT</span> w.wnaam, v.plaats
+<span class="kw">FROM</span>   werknemers w
+<span class="kw">JOIN</span>   vestigingen v <span class="kw">ON</span> w.vesnaam = v.vesnaam;
+
+<span class="cmt">-- Oudere notatie (SQL-86, werkt ook):</span>
+<span class="kw">SELECT</span> w.wnaam, v.plaats
+<span class="kw">FROM</span>   werknemers w, vestigingen v
+<span class="kw">WHERE</span>  w.vesnaam = v.vesnaam;</code></pre>
+
+  <h3>Autojoin (tabel met zichzelf)</h3>
+  <pre><code><span class="cmt">-- Wie verdient meer dan de directeur van hun vestiging?</span>
+<span class="kw">SELECT</span> w1.wnaam, w1.fnaam
+<span class="kw">FROM</span>   werknemers w1
+<span class="kw">JOIN</span>   werknemers d <span class="kw">ON</span> (w1.vesnaam = d.vesnaam)
+<span class="kw">WHERE</span>  d.fnaam = <span class="str">'DIRECTEUR'</span>
+  <span class="kw">AND</span>  w1.salaris > d.salaris;</code></pre>
+
+  <div class="tip"><strong>Transitiviteit vermijden:</strong> Voeg <code>AND ver1.wnr &lt; ver2.wnr</code> toe om dubbele paren (A,B) en (B,A) te vermijden.</div>
+
+  <h3>Niet-gelijke join (nonequijoin)</h3>
+  <pre><code><span class="cmt">-- Werknemers die max €100 van elkaar afwijken in salaris</span>
+<span class="kw">SELECT</span> w1.wnaam, w2.wnaam
+<span class="kw">FROM</span>   werknemers w1
+<span class="kw">JOIN</span>   werknemers w2
+  <span class="kw">ON</span>   w1.salaris <span class="kw">BETWEEN</span> w2.salaris - <span class="num">100</span> <span class="kw">AND</span> w2.salaris + <span class="num">100</span>
+<span class="kw">WHERE</span>  w1.wnr < w2.wnr;</code></pre>
+
+  <h3>JOIN met USING</h3>
+  <pre><code><span class="cmt">-- Als beide tabellen dezelfde kolomnaam gebruiken:</span>
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> studenten <span class="kw">JOIN</span> cijfers <span class="kw">USING</span> (studnr);</code></pre>
+
+  <h3>UNION</h3>
+  <p>Combineert de resultaten van twee SELECT-statements. Dubbele rijen worden standaard verwijderd.</p>
+  <pre><code><span class="kw">SELECT</span> wnr, wnaam, <span class="str">'TE VEEL'</span> <span class="kw">AS</span> betaald
+<span class="kw">FROM</span>   werknemers w <span class="kw">JOIN</span> schalen s <span class="kw">ON</span> w.fnaam = s.fnaam
+<span class="kw">WHERE</span>  salaris > maxsal
+<span class="kw">UNION</span>
+<span class="kw">SELECT</span> wnr, wnaam, <span class="str">'TE WEINIG'</span>
+<span class="kw">FROM</span>   werknemers w <span class="kw">JOIN</span> schalen s <span class="kw">ON</span> w.fnaam = s.fnaam
+<span class="kw">WHERE</span>  salaris < minsal
+<span class="kw">ORDER BY</span> betaald <span class="kw">DESC</span>;</code></pre>
+
+  <table>
+    <tr><th>Operator</th><th>Betekenis</th></tr>
+    <tr><td><code>UNION</code></td><td>Unie, geen duplicaten (A ∪ B)</td></tr>
+    <tr><td><code>UNION ALL</code></td><td>Unie, mét duplicaten</td></tr>
+    <tr><td><code>INTERSECT</code></td><td>Doorsnede (A ∩ B) — beter met INNER JOIN</td></tr>
+    <tr><td><code>MINUS</code></td><td>Verschil (A \ B) — beter met OUTER JOIN</td></tr>
+  </table>
+</section>
+
+<!-- ════════════════════════════════════════════
+     8. FETCH & OFFSET
+════════════════════════════════════════════ -->
+<section class="chapter" id="fetch">
+  <div class="chapter-tag">Hoofdstuk 8</div>
+  <h2 class="chapter-title">FETCH &amp; OFFSET (Deelresultaten)</h2>
+
+  <p>Nuttig voor paginering of het tonen van een top-N resultaat.</p>
+
+  <h3>Syntaxis</h3>
+  <pre><code><span class="kw">SELECT</span> wnaam, salaris
+<span class="kw">FROM</span>   werknemers
+<span class="kw">ORDER BY</span> salaris <span class="kw">DESC</span>
+<span class="kw">OFFSET</span> <span class="num">0</span> <span class="kw">ROWS</span>
+<span class="kw">FETCH NEXT</span> <span class="num">10</span> <span class="kw">ROWS ONLY</span>;</code></pre>
+
+  <h3>Varianten</h3>
+  <table>
+    <tr><th>Clausule</th><th>Betekenis</th></tr>
+    <tr><td><code>FETCH FIRST 5 ROWS ONLY</code></td><td>Eerste 5 rijen (exacte telling)</td></tr>
+    <tr><td><code>FETCH FIRST 5 PERCENT ROWS ONLY</code></td><td>Eerste 5% van de rijen</td></tr>
+    <tr><td><code>FETCH FIRST 8 ROWS WITH TIES</code></td><td>8 rijen + alle gelijke waarden aan de grens</td></tr>
+    <tr><td><code>OFFSET 10 ROWS</code></td><td>Sla de eerste 10 rijen over</td></tr>
+    <tr><td><code>ROWS</code> / <code>ROW</code></td><td>Synoniemen</td></tr>
+    <tr><td><code>FIRST</code> / <code>NEXT</code></td><td>Synoniemen (NEXT semantisch beter na OFFSET)</td></tr>
+  </table>
+
+  <h3>Paginering</h3>
+  <pre><code><span class="cmt">-- Pagina 2 van 5 per pagina:</span>
+<span class="kw">SELECT</span> wnaam, salaris <span class="kw">FROM</span> werknemers
+<span class="kw">ORDER BY</span> salaris <span class="kw">DESC NULLS LAST</span>
+<span class="kw">OFFSET</span>  <span class="num">5</span> <span class="kw">ROWS</span>         <span class="cmt">-- (paginanummer - 1) × pagesize</span>
+<span class="kw">FETCH NEXT</span> <span class="num">5</span> <span class="kw">ROWS ONLY</span>;
+
+<span class="cmt">-- Dynamisch (met variabelen):</span>
+<span class="kw">OFFSET</span> :pagesize * :offset <span class="kw">ROWS FETCH NEXT</span> :pagesize <span class="kw">ROWS ONLY</span>;</code></pre>
+
+  <div class="tip"><strong>Alternatieve syntax</strong> in andere DBMS: MySQL gebruikt <code>LIMIT 10</code>, SQL Server gebruikt <code>TOP 10</code>. Deze zijn niet-standaard SQL.</div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     9. STANDAARDFUNCTIES
+════════════════════════════════════════════ -->
+<section class="chapter" id="functies">
+  <div class="chapter-tag">Hoofdstuk 9</div>
+  <h2 class="chapter-title">Standaardfuncties &amp; GROUP BY</h2>
+
+  <h3>Aggregatiefuncties</h3>
+  <p>Werken op een set van rijen en geven <strong>één resultaat</strong> terug. NULL-waarden worden <em>genegeerd</em> (behalve bij <code>COUNT(*)</code>).</p>
+
+  <table>
+    <tr><th>Functie</th><th>Beschrijving</th><th>Voorbeeld</th></tr>
+    <tr><td><code>COUNT(*)</code></td><td>Aantal rijen (incl. NULL)</td><td><code>SELECT COUNT(*) FROM emp;</code></td></tr>
+    <tr><td><code>COUNT(kolom)</code></td><td>Aantal niet-NULL waarden</td><td><code>SELECT COUNT(fnaam) FROM emp;</code></td></tr>
+    <tr><td><code>COUNT(DISTINCT kolom)</code></td><td>Aantal unieke niet-NULL waarden</td><td><code>SELECT COUNT(DISTINCT fnaam) FROM emp;</code></td></tr>
+    <tr><td><code>SUM(kolom)</code></td><td>Som van waarden</td><td><code>SELECT SUM(salaris) FROM emp;</code></td></tr>
+    <tr><td><code>AVG(kolom)</code></td><td>Gemiddelde (deelt door niet-NULL count)</td><td><code>SELECT AVG(salaris) FROM emp;</code></td></tr>
+    <tr><td><code>MIN(kolom)</code></td><td>Minimum</td><td><code>SELECT MIN(salaris) FROM emp;</code></td></tr>
+    <tr><td><code>MAX(kolom)</code></td><td>Maximum</td><td><code>SELECT MAX(salaris) FROM emp;</code></td></tr>
+  </table>
+
+  <div class="warn"><strong>NULL-valkuil:</strong> <code>SUM(sal)/COUNT(*)</code> ≠ <code>AVG(sal)</code> als er NULL-waarden zijn! AVG deelt enkel door niet-NULL rijen.</div>
+
+  <h3>GROUP BY</h3>
+  <p>Groepeert rijen met gelijke waarden zodat de aggregatiefunctie <em>per groep</em> berekend wordt.</p>
+  <pre><code><span class="kw">SELECT</span> vesnaam, <span class="fn">COUNT</span>(*) <span class="kw">AS</span> aantal
+<span class="kw">FROM</span>   werknemers
+<span class="kw">GROUP BY</span> vesnaam;</code></pre>
+
+  <div class="tip"><strong>Regel:</strong> In een SELECT met GROUP BY mogen alleen de gegroepeerde kolommen én aggregatiefuncties voorkomen.</div>
+
+  <h3>HAVING</h3>
+  <p>Filtert groepen na de GROUP BY. Kan aggregatiefuncties bevatten (WHERE niet!).</p>
+  <pre><code><span class="kw">SELECT</span> vesnaam, <span class="fn">COUNT</span>(*) <span class="kw">AS</span> aantal
+<span class="kw">FROM</span>   werknemers
+<span class="kw">GROUP BY</span> vesnaam
+<span class="kw">HAVING</span>  <span class="fn">COUNT</span>(*) > <span class="num">4</span>;</code></pre>
+
+  <h3>WHERE vs. HAVING</h3>
+  <table>
+    <tr><th></th><th>WHERE</th><th>HAVING</th></tr>
+    <tr><td>Filtert</td><td>Individuele rijen</td><td>Groepen</td></tr>
+    <tr><td>Wanneer</td><td>Vóór GROUP BY</td><td>Na GROUP BY</td></tr>
+    <tr><td>Aggregaties</td><td>Niet toegelaten</td><td>Wel toegelaten</td></tr>
+  </table>
+
+  <h3>Volledig voorbeeld</h3>
+  <pre><code><span class="cmt">-- Locaties met ≥ 5 werknemers, excl. branche OPLEIDING</span>
+<span class="kw">SELECT</span>   plaats, <span class="fn">COUNT</span>(*)
+<span class="kw">FROM</span>     werknemers w
+<span class="kw">JOIN</span>     vestigingen v <span class="kw">ON</span> w.vesnaam = v.vesnaam
+<span class="kw">WHERE</span>    branche != <span class="str">'OPLEIDING'</span>
+<span class="kw">GROUP BY</span> plaats
+<span class="kw">HAVING</span>   <span class="fn">COUNT</span>(*) >= <span class="num">5</span>
+<span class="kw">ORDER BY</span> plaats;</code></pre>
+
+  <h3>NULL en GROUP BY / Index</h3>
+  <div class="warn"><strong>Let op:</strong> <code>GROUP BY job</code> zonder extra filter groepeert NULL als aparte groep maar een index op <code>job</code> wordt dan <em>niet</em> gebruikt. Voeg <code>WHERE job IS NOT NULL</code> toe om de index te kunnen benutten.</div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     10. SUBQUERIES
+════════════════════════════════════════════ -->
+<section class="chapter" id="subqueries">
+  <div class="chapter-tag">Hoofdstuk 10</div>
+  <h2 class="chapter-title">Subqueries</h2>
+
+  <p>Een subquery is een SELECT-statement <em>binnen</em> een andere SQL-instructie, meestal in de WHERE-clausule.</p>
+
+  <h3>Subquery met 1 resultaat</h3>
+  <p>Gebruik bij scalar subqueries: <code>= &lt; &gt; &lt;= &gt;= !=</code></p>
+  <pre><code><span class="cmt">-- Werknemers die het minst verdienen</span>
+<span class="kw">SELECT</span> wnaam <span class="kw">FROM</span> werknemers
+<span class="kw">WHERE</span>  salaris = (<span class="kw">SELECT</span> <span class="fn">MIN</span>(salaris) <span class="kw">FROM</span> werknemers)
+<span class="kw">ORDER BY</span> wnaam;</code></pre>
+
+  <h3>Subquery met meerdere resultaten</h3>
+  <p>Gebruik <code>IN</code> of <code>NOT IN</code>.</p>
+  <pre><code><span class="cmt">-- Werknemers die niet vervangen kunnen worden</span>
+<span class="kw">SELECT</span> wnaam <span class="kw">FROM</span> werknemers
+<span class="kw">WHERE</span>  wnr <span class="kw">NOT IN</span> (<span class="kw">SELECT</span> wnr <span class="kw">FROM</span> vervangingen)
+<span class="kw">ORDER BY</span> wnaam;</code></pre>
+
+  <h3>Gecorreleerde subquery</h3>
+  <p>De subquery verwijst naar een kolom uit de buitenste query. Wordt <em>per rij</em> van de buitenste query opnieuw geëvalueerd.</p>
+  <pre><code><span class="cmt">-- Per vestiging: de werknemer(s) die het meest verdienen</span>
+<span class="kw">SELECT</span> vesnaam, wnaam <span class="kw">FROM</span> werknemers w1
+<span class="kw">WHERE</span>  salaris = (<span class="kw">SELECT</span> <span class="fn">MAX</span>(salaris)
+                   <span class="kw">FROM</span>   werknemers w2
+                   <span class="kw">WHERE</span>  w1.vesnaam = w2.vesnaam);</code></pre>
+
+  <h3>EXISTS / NOT EXISTS</h3>
+  <p>De subquery geeft TRUE/FALSE terug. Efficiënt voor het checken van bestaan.</p>
+  <pre><code><span class="cmt">-- Vestigingen waar minstens 1 werknemer meer dan 2500 verdient</span>
+<span class="kw">SELECT</span> vesnaam <span class="kw">FROM</span> vestigingen v
+<span class="kw">WHERE EXISTS</span> (
+  <span class="kw">SELECT</span> <span class="num">1</span> <span class="kw">FROM</span> werknemers w
+  <span class="kw">WHERE</span>  v.vesnaam = w.vesnaam
+    <span class="kw">AND</span>  salaris > <span class="num">2500</span>
+)
+<span class="kw">ORDER BY</span> vesnaam;</code></pre>
+
+  <div class="good"><strong>Gecorreleerd vs. niet-gecorreleerd:</strong> Niet-gecorreleerd: subquery eenmalig. Gecorreleerd: subquery per rij → trager maar soms onvermijdelijk.</div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     11. DDL
+════════════════════════════════════════════ -->
+<section class="chapter" id="ddl">
+  <div class="chapter-tag">Hoofdstuk 11</div>
+  <h2 class="chapter-title">DDL — Data Definition Language</h2>
+
+  <p>DDL-statements veranderen de <em>structuur</em> van database-objecten. Ze worden onmiddellijk permanent (geen ROLLBACK mogelijk).</p>
+
+  <h3>CREATE TABLE</h3>
+  <pre><code><span class="kw">CREATE TABLE</span> werknemers (
+  id       <span class="fn">NUMBER</span>(<span class="num">3</span>)    <span class="kw">GENERATED BY DEFAULT ON NULL AS IDENTITY</span>,
+  wnaam    <span class="fn">VARCHAR2</span>(<span class="num">255</span>) <span class="kw">NOT NULL</span>,
+  salaris  <span class="fn">NUMBER</span>(<span class="num">7</span>,<span class="num">2</span>)  <span class="kw">DEFAULT</span> <span class="num">1000</span>,
+  fnaam    <span class="fn">VARCHAR2</span>(<span class="num">18</span>)  <span class="kw">DEFAULT</span> <span class="str">'ANALIST'</span>,
+  email    <span class="fn">VARCHAR2</span>(<span class="num">255</span>) <span class="kw">UNIQUE NOT NULL</span>,
+  vesnr    <span class="fn">NUMBER</span>(<span class="num">3</span>),
+  <span class="kw">CONSTRAINT</span> pk_werknemers_id <span class="kw">PRIMARY KEY</span>(id),
+  <span class="kw">CONSTRAINT</span> fk_werknemers_ves <span class="kw">FOREIGN KEY</span>(vesnr)
+    <span class="kw">REFERENCES</span> vestigingen(id)
+);</code></pre>
+
+  <h3>Constraints</h3>
+  <table>
+    <tr><th>Constraint</th><th>Doel</th></tr>
+    <tr><td><code>PRIMARY KEY</code></td><td>Uniek + NOT NULL; identificeert elke rij</td></tr>
+    <tr><td><code>FOREIGN KEY … REFERENCES</code></td><td>Verwijst naar PK in andere tabel (referentiële integriteit)</td></tr>
+    <tr><td><code>NOT NULL</code></td><td>Waarde verplicht bij INSERT</td></tr>
+    <tr><td><code>UNIQUE</code></td><td>Alle waarden moeten uniek zijn (NULL toegelaten)</td></tr>
+    <tr><td><code>DEFAULT waarde</code></td><td>Standaardwaarde als geen waarde opgegeven</td></tr>
+    <tr><td><code>CHECK (conditie)</code></td><td>Logische controle (bv. leeftijd ≥ 18)</td></tr>
+  </table>
+
+  <h3>Datatypes</h3>
+  <table>
+    <tr><th>Datatype</th><th>Gebruik</th><th>Opmerking</th></tr>
+    <tr><td><code>NUMBER(p, s)</code></td><td>Getallen</td><td>p=totale cijfers, s=decimalen. <code>NUMBER(5,2)</code>: max 123.45</td></tr>
+    <tr><td><code>VARCHAR2(n)</code></td><td>Variabele tekst</td><td>Max 4000 chars. Altijd lengte opgeven. Oracle-specifiek.</td></tr>
+    <tr><td><code>CHAR(n)</code></td><td>Vaste tekst</td><td>Aangevuld met spaties tot n. Max 2000.</td></tr>
+    <tr><td><code>DATE</code></td><td>Datum + tijd</td><td>Tot op de seconde. Formaat: DD-MON-YYYY. <code>SYSDATE</code> = nu.</td></tr>
+    <tr><td><code>TIMESTAMP(n)</code></td><td>Datum + tijd + ms</td><td>n decimalen na de seconde (standaard 6)</td></tr>
+    <tr><td><code>CLOB</code></td><td>Lange tekst</td><td>Tot ~32 TB tekst</td></tr>
+    <tr><td><code>BLOB</code></td><td>Binaire data</td><td>Tot ~32 TB. Best in aparte tabel.</td></tr>
+  </table>
+
+  <div class="tip"><strong>CHAR vs VARCHAR2:</strong> CHAR vult aan met spaties → <code>'A'</code> in CHAR(3) wordt <code>'A  '</code>. VARCHAR2 bewaart enkel de opgegeven tekens.</div>
+
+  <h3>ALTER TABLE</h3>
+  <pre><code><span class="kw">ALTER TABLE</span> werknemers <span class="kw">ADD</span>    achternaam <span class="fn">VARCHAR2</span>(<span class="num">255</span>);         <span class="cmt">-- kolom toevoegen</span>
+<span class="kw">ALTER TABLE</span> werknemers <span class="kw">MODIFY</span> achternaam <span class="fn">VARCHAR2</span>(<span class="num">255</span>) <span class="kw">NOT NULL</span>; <span class="cmt">-- kolom aanpassen</span>
+<span class="kw">ALTER TABLE</span> werknemers <span class="kw">DROP COLUMN</span> achternaam;                    <span class="cmt">-- kolom verwijderen</span></code></pre>
+
+  <div class="warn"><strong>NOT NULL toevoegen:</strong> Kan enkel als er geen NULL-waarden in de kolom zitten. Voeg eerst data toe of gebruik DEFAULT.</div>
+
+  <h3>DROP TABLE</h3>
+  <pre><code><span class="kw">DROP TABLE</span> werknemers;                   <span class="cmt">-- verwijdert tabel en alle data!</span>
+<span class="kw">DROP TABLE</span> werknemers <span class="kw">CASCADE CONSTRAINTS</span>; <span class="cmt">-- ook FK-constraints — sterk afgeraden!</span></code></pre>
+  <div class="warn"><strong>Onomkeerbaar!</strong> DROP TABLE kan niet worden teruggedraaid met ROLLBACK. Bij FK: verwijder eerst de child-tabel.</div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     12. DML
+════════════════════════════════════════════ -->
+<section class="chapter" id="dml">
+  <div class="chapter-tag">Hoofdstuk 12</div>
+  <h2 class="chapter-title">DML — Data Manipulation Language</h2>
+
+  <h3>INSERT</h3>
+  <pre><code><span class="cmt">-- Met kolomspecificatie (aanbevolen)</span>
+<span class="kw">INSERT INTO</span> werknemers (wnr, wnaam, fnaam, salaris)
+<span class="kw">VALUES</span> (<span class="num">22</span>, <span class="str">'Jan Modaal'</span>, <span class="str">'PROGRAMMEUR'</span>, <span class="num">2403</span>);
+
+<span class="cmt">-- Zonder kolomspecificatie (alle kolommen in DDL-volgorde)</span>
+<span class="kw">INSERT INTO</span> werknemers
+<span class="kw">VALUES</span> (<span class="num">22</span>, <span class="str">'Jan Modaal'</span>, <span class="str">'A1'</span>, <span class="str">'PROGRAMMEUR'</span>, <span class="num">2403</span>, <span class="num">3</span>);
+
+<span class="cmt">-- Datum invoeren</span>
+<span class="kw">INSERT INTO</span> datums (datum) <span class="kw">VALUES</span> (<span class="str">'11-NOV-2024'</span>);
+<span class="kw">INSERT INTO</span> datums (datum) <span class="kw">VALUES</span> (<span class="fn">SYSDATE</span>);</code></pre>
+
+  <div class="tip"><strong>Gebruik altijd kolomspecificatie</strong> voor leesbaarheid en bescherming tegen tabelwijzigingen.</div>
+
+  <h3>UPDATE</h3>
+  <pre><code><span class="cmt">-- Eén rij</span>
+<span class="kw">UPDATE</span> werknemers <span class="kw">SET</span> salaris = <span class="num">3000</span> <span class="kw">WHERE</span> wnaam = <span class="str">'PEETERS'</span>;
+
+<span class="cmt">-- Meerdere rijen + berekening</span>
+<span class="kw">UPDATE</span> werknemers
+<span class="kw">SET</span>   salaris = salaris * <span class="num">1.1</span>
+<span class="kw">WHERE</span> fnaam = <span class="str">'DIRECTEUR'</span> <span class="kw">AND</span> salaris < <span class="num">3000</span>;
+
+<span class="cmt">-- Met subquery</span>
+<span class="kw">UPDATE</span> werknemers w
+<span class="kw">SET</span>   w.salaris = (<span class="kw">SELECT</span> <span class="fn">AVG</span>(salaris) <span class="kw">FROM</span> werknemers)
+<span class="kw">WHERE</span> w.salaris < (<span class="kw">SELECT</span> <span class="fn">AVG</span>(salaris) <span class="kw">FROM</span> werknemers);</code></pre>
+
+  <div class="warn"><strong>Geen WHERE = alle rijen worden gewijzigd!</strong></div>
+
+  <h3>DELETE</h3>
+  <pre><code><span class="cmt">-- Specifieke rijen</span>
+<span class="kw">DELETE FROM</span> werknemers <span class="kw">WHERE</span> afdeling = <span class="str">'A1'</span>;
+
+<span class="cmt">-- Alle rijen (tabel blijft bestaan)</span>
+<span class="kw">DELETE FROM</span> werknemers;
+
+<span class="cmt">-- Sneller voor grote tabellen (DDL, niet terug te draaien)</span>
+<span class="kw">TRUNCATE TABLE</span> werknemers;</code></pre>
+
+  <table>
+    <tr><th></th><th>DELETE</th><th>TRUNCATE</th><th>DROP</th></tr>
+    <tr><td>Rollback?</td><td>Ja</td><td>Nee (DDL)</td><td>Nee (DDL)</td></tr>
+    <tr><td>Tabel blijft?</td><td>Ja</td><td>Ja (leeg)</td><td>Nee</td></tr>
+    <tr><td>WHERE?</td><td>Ja</td><td>Nee</td><td>N.v.t.</td></tr>
+    <tr><td>FK-check?</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
+  </table>
+
+  <h3>Foreign keys bij DELETE</h3>
+  <ul>
+    <li><strong>ON DELETE RESTRICT</strong> (standaard): verwijderen uit parent tabel mislukt als er child-rijen zijn</li>
+    <li><strong>ON DELETE CASCADE</strong>: verwijdert automatisch alle child-rijen — gebruik voorzichtig!</li>
+  </ul>
+</section>
+
+<!-- ════════════════════════════════════════════
+     13. TRANSACTIES (TCL)
+════════════════════════════════════════════ -->
+<section class="chapter" id="transacties">
+  <div class="chapter-tag">Hoofdstuk 13</div>
+  <h2 class="chapter-title">Transacties — TCL</h2>
+
+  <p>Bij elke DML-instructie (INSERT/UPDATE/DELETE) start automatisch een <strong>transactie</strong>. Wijzigingen zijn zichtbaar voor de huidige sessie, maar nog niet permanent opgeslagen.</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>COMMIT</h4>
+      <p>Sluit de transactie af en schrijft alle wijzigingen permanent naar de database. Start een nieuwe transactie.</p>
+      <pre><code><span class="kw">COMMIT</span>;</code></pre>
+    </div>
+    <div class="card">
+      <h4>ROLLBACK</h4>
+      <p>Annuleert alle wijzigingen sinds het laatste COMMIT. Start een nieuwe transactie.</p>
+      <pre><code><span class="kw">ROLLBACK</span>;</code></pre>
+    </div>
+  </div>
+
+  <h3>Voorbeeld</h3>
+  <pre><code><span class="kw">DELETE FROM</span> bestelregels;   <span class="cmt">-- tabel is nu leeg (maar NIET permanent)</span>
+<span class="kw">ROLLBACK</span>;                   <span class="cmt">-- alles terug! Data hersteld.</span>
+
+<span class="kw">DELETE FROM</span> bestelregels;
+<span class="kw">COMMIT</span>;                     <span class="cmt">-- nu permanent weg</span>
+<span class="kw">ROLLBACK</span>;                   <span class="cmt">-- doet niets meer (nieuwe transactie, geen wijzigingen)</span></code></pre>
+
+  <div class="warn"><strong>Let op:</strong> SQL*Plus afsluiten zonder COMMIT = impliciete ROLLBACK. DDL-statements (CREATE, DROP, TRUNCATE) zijn altijd automatisch COMMIT — niet terug te draaien!</div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     14. INDEXEN
+════════════════════════════════════════════ -->
+<section class="chapter" id="indexen">
+  <div class="chapter-tag">Hoofdstuk 14</div>
+  <h2 class="chapter-title">Indexen</h2>
+
+  <p>Een index is een geordende structuur die snellere toegang tot data mogelijk maakt. Intern georganiseerd als een <strong>B-tree</strong> (gebalanceerde boom).</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>Voordelen</h4>
+      <ul>
+        <li>Snellere SELECT bij WHERE/JOIN/GROUP BY op geïndexeerde kolom</li>
+        <li>Complexiteit: O(log n) i.p.v. O(n)</li>
+        <li>Kan verschil zijn tussen 4s en 900µs</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Nadelen</h4>
+      <ul>
+        <li>INSERT/UPDATE/DELETE trager (index moet bijgewerkt worden)</li>
+        <li>Extra opslagruimte (verwaarloosbaar t.o.v. snelheidswinst)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Automatische indexen</h3>
+  <p>Oracle maakt automatisch een index op kolommen met een <strong>PRIMARY KEY</strong> of <strong>UNIQUE</strong> constraint.</p>
+
+  <h3>Index aanmaken</h3>
+  <pre><code><span class="kw">CREATE INDEX</span> ix_planten_kleur
+<span class="kw">ON</span> planten(kleur);
+
+<span class="cmt">-- Aaneengeschakelde index (meerdere kolommen, max 16)</span>
+<span class="kw">CREATE INDEX</span> ix_emp_naam_fnaam
+<span class="kw">ON</span> werknemers(wnaam, fnaam);</code></pre>
+
+  <h3>Wanneer wordt een index gebruikt?</h3>
+  <table>
+    <tr><th>Query</th><th>Index gebruikt?</th><th>Reden</th></tr>
+    <tr><td><code>SELECT ename, sal FROM emp</code></td><td>❌ Nee</td><td>Geen WHERE/GROUP BY</td></tr>
+    <tr><td><code>WHERE ename = 'CLARK'</code></td><td>✅ Ja</td><td>Geïndexeerde kolom in WHERE</td></tr>
+    <tr><td><code>WHERE sal IS NULL</code></td><td>❌ Nee</td><td>NULL niet opgenomen in index</td></tr>
+    <tr><td><code>WHERE sal IS NOT NULL</code></td><td>✅ Ja</td><td>Sluit NULL's uit</td></tr>
+    <tr><td><code>GROUP BY job</code> (zonder WHERE)</td><td>❌ Nee</td><td>Mogelijk NULL-waarden</td></tr>
+    <tr><td><code>GROUP BY job WHERE job IS NOT NULL</code></td><td>✅ Ja</td><td>NULL-waarden uitgesloten</td></tr>
+  </table>
+
+  <div class="tip"><strong>NULL-regel:</strong> NULL-waarden worden nooit opgenomen in een index. IS NULL in een WHERE maakt gebruik van de index onmogelijk.</div>
+
+  <h3>Best practices</h3>
+  <ul>
+    <li>Maak een index als de tabel <strong>&gt; 200 rijen</strong> heeft</li>
+    <li>Indexeer kolommen die vaak voorkomen in <code>WHERE</code>, <code>JOIN</code> of <code>GROUP BY</code></li>
+    <li>Richtlijn: <strong>max 3 indexen per tabel</strong> (tenzij de tabel uitsluitend voor SELECTs is)</li>
+    <li>Bij aanmaken van een tabel: <em>eerst data invoegen, dan index aanmaken</em></li>
+    <li>Bij massa-import in bestaande tabel: index droppen, data invoegen, index terug aanmaken</li>
+  </ul>
+
+  <h3>Index verwijderen / herbouwen</h3>
+  <pre><code><span class="kw">DROP INDEX</span> ix_planten_kleur;
+<span class="kw">ALTER INDEX</span> ix_planten_kleur <span class="kw">REBUILD</span>;       <span class="cmt">-- herstructureer index</span>
+<span class="kw">ALTER INDEX</span> ix_planten_kleur <span class="kw">INVISIBLE</span>;    <span class="cmt">-- tijdelijk uitschakelen zonder verwijderen</span></code></pre>
+
+</section>
+
+</main>
+
+<script>
+  // Progress bar
+  const bar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const scrolled = doc.scrollTop;
+    const max = doc.scrollHeight - doc.clientHeight;
+    bar.style.transform = `scaleX(${scrolled / max})`;
+  });
+
+  // Active nav link
+  const sections = document.querySelectorAll('.chapter');
+  const navLinks = document.querySelectorAll('#nav-links a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const link = document.querySelector(`#nav-links a[href="#${e.target.id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+
+  // Search / highlight
+  const searchInput = document.getElementById('search-input');
+  const mainEl = document.getElementById('main');
+
+  function clearHighlights() {
+    mainEl.querySelectorAll('mark').forEach(m => {
+      const parent = m.parentNode;
+      parent.replaceChild(document.createTextNode(m.textContent), m);
+      parent.normalize();
+    });
+  }
+
+  function highlightText(node, term) {
+    if (node.nodeType === 3) {
+      const idx = node.textContent.toLowerCase().indexOf(term.toLowerCase());
+      if (idx === -1) return;
+      const mark = document.createElement('mark');
+      const after = node.splitText(idx);
+      after.splitText(term.length);
+      mark.appendChild(after.cloneNode(true));
+      after.parentNode.replaceChild(mark, after);
+    } else if (node.nodeType === 1 && !['MARK','SCRIPT','STYLE'].includes(node.tagName)) {
+      [...node.childNodes].forEach(child => highlightText(child, term));
+    }
+  }
+
+  searchInput.addEventListener('input', () => {
+    clearHighlights();
+    const term = searchInput.value.trim();
+    if (term.length < 2) return;
+    highlightText(mainEl, term);
+    const firstMark = mainEl.querySelector('mark');
+    if (firstMark) firstMark.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+</script>
+</body>
+</html>
